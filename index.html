@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>reboot01 — profile</title>
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <canvas id="rain" aria-hidden="true"></canvas>
+    <canvas id="trail" aria-hidden="true"></canvas>
+
+    <main id="app">
+      <!-- LOGIN VIEW -->
+      <section id="view-login" class="view">
+        <div class="terminal">
+          <div class="terminal__bar">
+            <span>&gt;_</span>
+            <span class="terminal__title">reboot01 — login</span>
+          </div>
+          <div class="terminal__body">
+            <p class="prompt">connect to learn.reboot01.com</p>
+            <form id="login-form" method="post" autocomplete="on">
+              <label for="identifier">username or email</label>
+              <input type="text" id="identifier" name="identifier" autocomplete="username" />
+
+              <label for="password">password</label>
+              <input type="password" id="password" name="password" autocomplete="current-password" />
+
+              <button type="submit" id="login-submit">log in</button>
+              <p id="login-error" class="error" role="alert" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- profule vue-->
+      <section id="view-profile" class="view" hidden>
+        <header class="topbar">
+          <p class="prompt">
+            <span id="whoami">user</span>
+            <span class="prompt__at">@</span>
+            reboot01
+            <span class="prompt__colon">:</span>
+            ~$
+          </p>
+          <button id="logout-btn" type="button">log out</button>
+        </header>
+
+        <div id="sections" class="cards"></div>
+
+        <section class="stats" aria-labelledby="stats-heading">
+          <h2 id="stats-heading">statistics</h2>
+          <div class="stats__grid">
+            <figure id="xp-by-project" class="chart">
+              <figcaption>xp by project</figcaption>
+              <div class="chart__canvas"></div>
+            </figure>
+            <figure id="xp-over-time" class="chart">
+              <figcaption>xp over time</figcaption>
+              <div class="chart__canvas"></div>
+            </figure>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="src/main.ts"></script>
+  </body>
+</html>

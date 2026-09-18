@@ -1,0 +1,383 @@
+:root {
+  --bg: #0a0908;
+  --panel: #14120f;
+  --panel-alt: #1b1811;
+  --border: #2b2620;
+  --border-strong: #443b2c;
+  --text: #e8e1d3;
+  --text-dim: #9a9186;
+  --text-faint: #665e51;
+  --amber: #ffb000;
+  --green: #5fbd7c;
+  --red: #c1554a;
+  --font-mono: ui-monospace, 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Consolas, 'Roboto Mono', monospace;
+  --radius: 3px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* background layers */
+
+#rain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+}
+
+#trail {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  display: block;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* to remove the credentials */
+.view[hidden] {
+  display: none !important;
+}
+
+/* login view  */
+
+#view-login {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.terminal {
+  width: 100%;
+  max-width: 360px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.terminal__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.terminal__body {
+  padding: 20px;
+}
+
+.prompt {
+  margin: 0 0 18px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.prompt__at,
+.prompt__colon {
+  color: var(--text-faint);
+}
+
+form label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin: 14px 0 6px;
+}
+
+form label:first-of-type {
+  margin-top: 0;
+}
+
+form input {
+  width: 100%;
+  padding: 9px 10px;
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+form input:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 1px;
+  border-color: var(--amber);
+}
+
+button {
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#login-submit {
+  width: 100%;
+  margin-top: 18px;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--amber);
+  color: var(--amber);
+  border-radius: var(--radius);
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+#login-submit:hover,
+#login-submit:focus-visible {
+  background: var(--amber);
+  color: #1a1200;
+}
+
+#login-submit:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+#login-submit:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.error {
+  margin: 14px 0 0;
+  min-height: 1em;
+  font-size: 12.5px;
+  color: var(--red);
+}
+
+/* profile view */
+
+#view-profile {
+  flex: 1;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px clamp(16px, 4vw, 48px);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar .prompt {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text);
+}
+
+#whoami {
+  color: var(--amber);
+}
+
+#logout-btn {
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-dim);
+  border-radius: var(--radius);
+  transition:
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+#logout-btn:hover,
+#logout-btn:focus-visible {
+  color: var(--text);
+  border-color: var(--text-dim);
+}
+
+#logout-btn:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 720px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+
+.card__label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.card__value {
+  margin: 0;
+  font-size: 22px;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.card__value--accent {
+  color: var(--amber);
+  text-shadow: 0 0 10px rgba(255, 176, 0, 0.25);
+}
+
+.status {
+  color: var(--text-dim);
+  font-size: 13px;
+  grid-column: 1 / -1;
+}
+
+.status--error {
+  color: var(--red);
+}
+
+.stats h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin: 0 0 14px;
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 720px) {
+  .stats__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart {
+  margin: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.chart figcaption {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.chart__canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.chart__empty {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--text-faint);
+}
+
+.card__sub {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+/* charts */
+
+.chart__canvas {
+  min-height: 120px;
+}
+
+.chart-hit {
+  cursor: pointer;
+}
+
+.chart-tooltip {
+  position: fixed;
+  z-index: 10;
+  max-width: 280px;
+  padding: 8px 10px;
+  background: var(--panel-alt);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
+  font-size: 11.5px;
+  line-height: 1.5;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 90ms ease;
+}
+
+.chart-tooltip.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tt-title {
+  color: var(--amber);
+  margin-bottom: 2px;
+  word-break: break-word;
+}
+
+.tt-sub {
+  color: var(--text-dim);
+}
+
+.tt-sub--total {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+  color: var(--text-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
